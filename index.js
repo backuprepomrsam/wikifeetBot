@@ -8,6 +8,9 @@ const dataRegex = /messanger\['gdata'\] \= (\[.*?\]);/;
 //
 const TelegramBot = require("node-telegram-bot-api");
 const bot = new TelegramBot(process.env.TOKEN, { polling: true });
+//
+const express = require("express");
+const app = express();
 /**
  * Searches for people
  * @param {string} query The search query
@@ -94,3 +97,9 @@ function downloadImage(url, filepath) {
     });
   });
 }
+
+app.all("/", (req, res) => {
+  console.log("Just got a request!");
+  res.send("Yo!");
+});
+app.listen(process.env.PORT || 3000);
