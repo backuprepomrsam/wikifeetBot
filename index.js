@@ -69,11 +69,17 @@ async function main(name, msg) {
 
   //let random = 0 | (pics.length * Math.random());
   pics.forEach((element, index) => {
-    bot.sendPhoto(msg.chat.id, element);
+    bot.sendPhoto(msg.chat.id, element, { caption: index });
   });
 }
 
 //main("inna");
+
+bot.onText(/\/start/, (msg) => {
+  bot.sendMessage(msg.chat.id, "hi friend");
+});
+
+bot.setWebHook("https://beautiful-underclothes-bass.cyclic.app");
 
 bot.onText(/\/name (.+)/, (msg, match) => {
   main(match[1], msg);
@@ -98,7 +104,7 @@ function downloadImage(url, filepath) {
   });
 }
 
-app.all("/", (req, res) => {
+app.get("/", (req, res) => {
   console.log("Just got a request!");
   res.send("Yo!");
 });
