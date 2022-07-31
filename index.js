@@ -7,7 +7,7 @@ const searchRegex =
 const dataRegex = /messanger\['gdata'\] \= (\[.*?\]);/;
 //
 const TelegramBot = require("node-telegram-bot-api");
-const bot = new TelegramBot(process.env.TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.TOKEN);
 //
 const express = require("express");
 const app = express();
@@ -78,8 +78,6 @@ async function main(name, msg) {
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, "hi friend");
 });
-
-bot.setWebHook("https://beautiful-underclothes-bass.cyclic.app");
 
 bot.onText(/\/name (.+)/, (msg, match) => {
   main(match[1], msg);
