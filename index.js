@@ -1,3 +1,4 @@
+require("dotenv").config();
 const needle = require("needle");
 const client = require("https");
 const fs = require("fs");
@@ -6,8 +7,7 @@ const searchRegex =
 const dataRegex = /messanger\['gdata'\] \= (\[.*?\]);/;
 //
 const TelegramBot = require("node-telegram-bot-api");
-const token = "5503556494:AAEKUVyRMHgywkZBQAR3KKitzu7pNa8GRCU";
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(process.env.TOKEN, { polling: true });
 /**
  * Searches for people
  * @param {string} query The search query
@@ -62,7 +62,6 @@ async function getImages(person) {
 async function main(name, msg) {
   bot.sendMessage(msg.chat.id, "Seaching......");
   let pokimane = (await search(name))[0];
-  console.log(pokimane);
   let pics = await getImages(pokimane);
 
   //let random = 0 | (pics.length * Math.random());
